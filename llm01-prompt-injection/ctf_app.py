@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, jsonify
-from huggingface_hub import InferenceClient
+from openai import OpenAI
 import logging
 import csv
 from datetime import datetime
@@ -17,15 +17,20 @@ logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(levelname)s - %(message)s',
     handlers=[
-        logging.FileHandler(log_file),  # Salva logs em arquivo compartilhado
-        logging.StreamHandler()         # Exibe logs no terminal
+        logging.FileHandler(log_file),
+        logging.StreamHandler()
     ]
 )
 
-# Cliente Hugging Face
+# Cliente OpenAI com endpoint do Hugging Face Inference Endpoint
 HF_TOKEN = "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"
+ENDPOINT_URL = "https://xi7atce6p426bl0y.us-east-1.aws.endpoints.huggingface.cloud/v1/"
 MODEL_NAME = "mistralai/Mistral-7B-Instruct-v0.1"
-client = InferenceClient(model=MODEL_NAME, token=HF_TOKEN)
+
+client = OpenAI(
+    base_url=ENDPOINT_URL,
+    api_key=HF_TOKEN
+)
 
 # Prompt secreto para o desafio
 CTF_SYSTEM_PROMPT = """
@@ -71,7 +76,6 @@ def home():
 def chat():
     user_message = request.form.get('message')
 
-    # Logging do prompt recebido
     logging.info(f"Prompt recebido: {user_message}")
 
     if not user_message:
@@ -81,18 +85,21 @@ def chat():
     response_data = handle_prompt(user_message)
     return jsonify(response_data)
 
-# Função para tratar os prompts
 def handle_prompt(prompt):
     try:
-        response = client.chat_completion(
+        chat_completion = client.chat.completions.create(
+            model=MODEL_NAME,
             messages=[
                 {"role": "system", "content": CTF_SYSTEM_PROMPT},
                 {"role": "user", "content": prompt}
             ],
-            max_tokens=200
+            max_tokens=200,
+            temperature=None,
+            top_p=None,
+            stream=False
         )
 
-        assistant_reply = response.choices[0].message.content
+        assistant_reply = chat_completion.choices[0].message.content
         flag_revealed = "CTF{pr0mp7_1nj3c710n_ma5tery}" in assistant_reply
 
         logging.info(f"Resposta do modelo: {assistant_reply}")
@@ -105,7 +112,7 @@ def handle_prompt(prompt):
                 datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
                 prompt,
                 assistant_reply,
-                'Sim' if flag_revealed else 'Não'
+                'Yes' if flag_revealed else 'No'
             ])
 
         return {'response': assistant_reply}
@@ -114,7 +121,6 @@ def handle_prompt(prompt):
         logging.error(f"Erro ao processar a solicitação: {e}")
         return {'error': str(e)}
 
-# Função para executar automaticamente prompts a partir de arquivo
 @app.route('/auto-test', methods=['GET'])
 def auto_test():
     test_file = 'prompts.txt'
