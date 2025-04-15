@@ -6,6 +6,7 @@ WORKDIR /app
 
 # Copy only the required files
 COPY ctf_app.py .
+COPY prompts.txt .
 COPY requirements.txt .
 COPY templates/ ./templates/
 
