@@ -9,7 +9,7 @@ COPY app/llm03_app.py .
 COPY app/prompts.txt .
 COPY app/poisoned_dataset.txt .
 COPY app/templates/ ./templates/
-COPY requirements.txt .
+COPY app/requirements.txt .
 
 # Instala as dependências
 RUN pip install --no-cache-dir -r requirements.txt
