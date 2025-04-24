@@ -6,6 +6,7 @@ WORKDIR /app
 
 # Copia os arquivos da aplicação
 COPY app/llm05_app.py .
+COPY app/llm05_defensive.py .
 COPY app/prompts.txt .
 COPY app/templates/ ./templates/
 COPY requirements.txt .
@@ -17,7 +18,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 RUN mkdir -p /app/shared
 
 # Variáveis de ambiente do Flask
-ENV FLASK_APP=llm05_app.py
+# ENV FLASK_APP=llm05_app.py
+ENV FLASK_APP=llm05_defensive.py
 ENV FLASK_ENV=production
 
 # Expondo porta padrão do Flask

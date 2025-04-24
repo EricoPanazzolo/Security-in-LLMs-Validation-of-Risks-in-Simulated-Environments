@@ -9,15 +9,17 @@
   <body class="bg-gray-900 text-white flex flex-col h-full overflow-hidden">
     <header class="flex-none bg-indigo-600 p-4 shadow">
       <h1 class="text-2xl font-bold">LLM05: Improper Output Handling</h1>
-      <p class="text-indigo-200">Roubando cookies via XSS gerado pelo LLM</p>
+      <p class="text-indigo-200">
+        JavaScript ou Markdown retornado pelo LLM é interpretado pelo browser!
+      </p>
     </header>
     <main class="flex-1 flex flex-col overflow-hidden p-4">
-      <!-- Container de Chat: apenas ele rola -->
+      <!-- Chat container: rola infinitamente -->
       <div
         id="chat-messages"
         class="flex-1 bg-gray-800 rounded-lg p-4 overflow-y-auto space-y-4"
       ></div>
-      <!-- Form fixo na base -->
+      <!-- Input fixo -->
       <form id="chat-form" class="flex-none mt-4 flex">
         <input
           id="message-input"
@@ -42,7 +44,7 @@
         e.preventDefault();
         const msg = input.value.trim();
         if (!msg) return;
-        addMessage("Você", msg);
+        addMessage("Você", msg, false);
         input.value = "";
         addMessage("Assistente", "Thinking...", true);
         try {
@@ -54,35 +56,49 @@
           const data = await response.json();
           removeThinking();
           if (data.error) {
-            addMessage("Erro", data.error);
+            addMessage("Erro", data.error, false);
           } else {
-            addMessage("Assistente", data.response);
+            addMessage("Assistente", data.response, false);
           }
         } catch (err) {
           removeThinking();
-          addMessage("Erro", err.message);
+          addMessage("Erro", err.message, false);
         }
-        // Scroll no container de mensagens
         chatMessages.scrollTop = chatMessages.scrollHeight;
       });
 
-      function addMessage(sender, text, thinking = false) {
+      function addMessage(sender, text, thinking) {
         const wrapper = document.createElement("div");
         wrapper.className = "flex flex-col items-start";
         const name = document.createElement("div");
         name.textContent = sender;
         name.className = "text-xs text-gray-400 mb-1";
         const msg = document.createElement("div");
-        msg.innerHTML = text;
+        if (sender === "Assistente" && !thinking) {
+          // Injetamos o output do LLM diretamente como HTML/JS
+          msg.innerHTML = text;
+        } else {
+          msg.textContent = text;
+        }
         msg.className = `max-w-xl p-2 rounded-lg break-words ${
           sender === "Você"
-            ? "bg-indigo-700 self-end"
-            : "bg-gray-700 self-start"
+            ? "bg-indigo-700 self-end text-white"
+            : "bg-gray-700 self-start text-white"
         } ${thinking ? "opacity-50" : ""}`;
         if (thinking) msg.classList.add("assistant-thinking");
         wrapper.appendChild(name);
         wrapper.appendChild(msg);
         chatMessages.appendChild(wrapper);
+
+        // Executa scripts injetados no output do LLM
+        msg.querySelectorAll("script").forEach((oldScript) => {
+          const newScript = document.createElement("script");
+          for (let attr of oldScript.attributes) {
+            newScript.setAttribute(attr.name, attr.value);
+          }
+          newScript.textContent = oldScript.textContent;
+          oldScript.parentNode.replaceChild(newScript, oldScript);
+        });
       }
 
       function removeThinking() {
