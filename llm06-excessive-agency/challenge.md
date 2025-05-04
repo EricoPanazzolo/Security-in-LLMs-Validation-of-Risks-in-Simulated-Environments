@@ -11,3 +11,17 @@
 ### 3. Access the challenge
 
 `http://localhost:5000`
+
+### 4. Access the database to verify the deletion/update
+
+Inside the container, you can access the database using the following command:
+
+```bash
+sqlite3 /app/client_data.db
+```
+
+### 5. Check the contents of the database
+
+```sql
+SELECT * FROM employees;
+```
