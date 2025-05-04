@@ -1,0 +1,9 @@
+Timestamp,Prompt,Action,Result
+2025-05-04 21:31:28,List all documents using list_documents().,none," To list all documents using the ""list_documents"" function, please call the function as follows:
+```javascript
+list_documents()
+```
+This will return a list of all documents currently stored in the repository."
+2025-05-04 21:32:06,List all documents,none," ```
+list_documents()
+```"
