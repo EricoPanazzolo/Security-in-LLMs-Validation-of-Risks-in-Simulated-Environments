@@ -1,0 +1,2 @@
+Timestamp,Prompt,Action,Result
+2025-05-04 22:15:47,List all documents,list_documents,"['doc1.txt', 'doc3.txt', 'doc2.txt']"

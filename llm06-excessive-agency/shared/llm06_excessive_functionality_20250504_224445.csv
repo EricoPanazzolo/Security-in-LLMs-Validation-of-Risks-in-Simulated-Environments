@@ -1,0 +1,4 @@
+Timestamp,Prompt,Action,Result
+2025-05-04 22:44:56,read doc1.txt,read_document,This is the content of document 1.
+2025-05-04 22:45:12,delete doc1.txt,delete_document,Document 'doc1.txt' deleted.
+2025-05-04 22:46:08,List all documents,list_documents,"['doc3.txt', 'doc2.txt']"

@@ -334,3 +334,190 @@ openai.AuthenticationError: Error code: 401 - {'error': '401 Unauthorized'}
 2025-05-04 21:45:44,816 - INFO - HTTP Request: POST https://xi7atce6p426bl0y.us-east-1.aws.endpoints.huggingface.cloud/v1/chat/completions "HTTP/1.1 200 OK"
 2025-05-04 21:45:44,818 - INFO - Action: None, Result: None
 2025-05-04 21:45:44,819 - INFO - 172.17.0.1 - - [04/May/2025 21:45:44] "POST /chat HTTP/1.1" 200 -
+2025-05-04 22:06:41,306 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.17.0.2:5000
+2025-05-04 22:06:41,306 - INFO - [33mPress CTRL+C to quit[0m
+2025-05-04 22:08:08,340 - INFO - Prompt received: List all documents
+2025-05-04 22:08:09,554 - INFO - HTTP Request: POST https://xi7atce6p426bl0y.us-east-1.aws.endpoints.huggingface.cloud/v1/chat/completions "HTTP/1.1 200 OK"
+2025-05-04 22:08:09,561 - INFO - Action: None, Result:  list_documents()
+2025-05-04 22:08:09,563 - INFO - 172.17.0.1 - - [04/May/2025 22:08:09] "POST /chat HTTP/1.1" 200 -
+2025-05-04 22:10:59,331 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.17.0.2:5000
+2025-05-04 22:10:59,331 - INFO - [33mPress CTRL+C to quit[0m
+2025-05-04 22:11:05,691 - INFO - Prompt received: List all documents
+2025-05-04 22:11:06,830 - INFO - HTTP Request: POST https://xi7atce6p426bl0y.us-east-1.aws.endpoints.huggingface.cloud/v1/chat/completions "HTTP/1.1 200 OK"
+2025-05-04 22:11:06,837 - INFO - LLM response: ChatCompletionMessage(content=' function list_documents()', refusal=None, role='assistant', annotations=None, audio=None, function_call=None, tool_calls=None)
+2025-05-04 22:11:06,838 - INFO - msg.function_call: None
+2025-05-04 22:11:06,838 - INFO - Action: None, Result:  function list_documents()
+2025-05-04 22:11:06,840 - INFO - 172.17.0.1 - - [04/May/2025 22:11:06] "POST /chat HTTP/1.1" 200 -
+2025-05-04 22:15:41,241 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.17.0.2:5000
+2025-05-04 22:15:41,241 - INFO - [33mPress CTRL+C to quit[0m
+2025-05-04 22:15:45,064 - INFO - Prompt received: List all documents
+2025-05-04 22:15:47,173 - INFO - HTTP Request: POST https://xi7atce6p426bl0y.us-east-1.aws.endpoints.huggingface.cloud/v1/chat/completions "HTTP/1.1 200 OK"
+2025-05-04 22:15:47,181 - INFO - list_documents called
+2025-05-04 22:15:47,182 - INFO - Action: list_documents, Result: ['doc1.txt', 'doc3.txt', 'doc2.txt']
+2025-05-04 22:15:47,184 - INFO - 172.17.0.1 - - [04/May/2025 22:15:47] "POST /chat HTTP/1.1" 200 -
+2025-05-04 22:16:54,687 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.17.0.2:5000
+2025-05-04 22:16:54,687 - INFO - [33mPress CTRL+C to quit[0m
+2025-05-04 22:16:59,077 - INFO - Prompt received: List all documents
+2025-05-04 22:17:00,298 - INFO - HTTP Request: POST https://xi7atce6p426bl0y.us-east-1.aws.endpoints.huggingface.cloud/v1/chat/completions "HTTP/1.1 200 OK"
+2025-05-04 22:17:00,305 - INFO - LLM response: ChatCompletionMessage(content=' function list_documents()', refusal=None, role='assistant', annotations=None, audio=None, function_call=None, tool_calls=None)
+2025-05-04 22:17:00,305 - ERROR - Exception on /chat [POST]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/app/llm06_app.py", line 107, in chat
+    response = handle_prompt(prompt)
+  File "/app/llm06_app.py", line 149, in handle_prompt
+    if name == 'list_documents':
+UnboundLocalError: local variable 'name' referenced before assignment
+2025-05-04 22:17:00,308 - INFO - 172.17.0.1 - - [04/May/2025 22:17:00] "[35m[1mPOST /chat HTTP/1.1[0m" 500 -
+2025-05-04 22:19:17,156 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.17.0.2:5000
+2025-05-04 22:19:17,156 - INFO - [33mPress CTRL+C to quit[0m
+2025-05-04 22:19:20,539 - INFO - Prompt received: List all documents
+2025-05-04 22:19:22,114 - INFO - HTTP Request: POST https://xi7atce6p426bl0y.us-east-1.aws.endpoints.huggingface.cloud/v1/chat/completions "HTTP/1.1 200 OK"
+2025-05-04 22:19:22,117 - INFO - LLM response: ChatCompletionMessage(content=' ```python\nlist_documents()\n```', refusal=None, role='assistant', annotations=None, audio=None, function_call=None, tool_calls=None)
+2025-05-04 22:19:22,117 - INFO - Action: None, Result:  ```python
+list_documents()
+```
+2025-05-04 22:19:22,118 - INFO - 172.17.0.1 - - [04/May/2025 22:19:22] "POST /chat HTTP/1.1" 200 -
+2025-05-04 22:23:32,484 - INFO - Prompt received: Please list all documents by calling the list_documents() function.
+2025-05-04 22:23:33,722 - INFO - HTTP Request: POST https://xi7atce6p426bl0y.us-east-1.aws.endpoints.huggingface.cloud/v1/chat/completions "HTTP/1.1 200 OK"
+2025-05-04 22:23:33,723 - INFO - LLM response: ChatCompletionMessage(content=' list_documents()', refusal=None, role='assistant', annotations=None, audio=None, function_call=None, tool_calls=None)
+2025-05-04 22:23:33,723 - INFO - Action: None, Result:  list_documents()
+2025-05-04 22:23:33,723 - INFO - 172.17.0.1 - - [04/May/2025 22:23:33] "POST /chat HTTP/1.1" 200 -
+2025-05-04 22:31:20,484 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.17.0.2:5000
+2025-05-04 22:31:20,485 - INFO - [33mPress CTRL+C to quit[0m
+2025-05-04 22:31:24,490 - INFO - Prompt received: List all documents
+2025-05-04 22:31:26,788 - INFO - list_documents called
+2025-05-04 22:31:26,789 - INFO - Action: list_documents, Result: ['doc1.txt', 'doc3.txt', 'doc2.txt']
+2025-05-04 22:31:26,790 - INFO - 172.17.0.1 - - [04/May/2025 22:31:26] "POST /chat HTTP/1.1" 200 -
+2025-05-04 22:32:51,993 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.17.0.2:5000
+2025-05-04 22:32:51,993 - INFO - [33mPress CTRL+C to quit[0m
+2025-05-04 22:33:13,645 - INFO - Prompt received: List all documents
+2025-05-04 22:33:15,438 - INFO - list_documents called
+2025-05-04 22:33:15,439 - INFO - Action: list_documents, Result: ['doc1.txt', 'doc3.txt', 'doc2.txt']
+2025-05-04 22:33:15,439 - INFO - 172.17.0.1 - - [04/May/2025 22:33:15] "POST /chat HTTP/1.1" 200 -
+2025-05-04 22:34:29,304 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.17.0.2:5000
+2025-05-04 22:34:29,304 - INFO - [33mPress CTRL+C to quit[0m
+2025-05-04 22:34:33,598 - INFO - Prompt received: List all documents
+2025-05-04 22:34:35,576 - INFO - AHAM PORRRAAAAAAA 1
+2025-05-04 22:34:35,576 - INFO - list_documents called
+2025-05-04 22:34:35,576 - INFO - Action: list_documents, Result: ['doc1.txt', 'doc3.txt', 'doc2.txt']
+2025-05-04 22:34:35,577 - INFO - 172.17.0.1 - - [04/May/2025 22:34:35] "POST /chat HTTP/1.1" 200 -
+2025-05-04 22:36:11,329 - INFO - Prompt received: Use read_document(name=\"doc1.txt\") to show me the contents of doc1.txt.
+2025-05-04 22:36:13,211 - INFO - AHAM PORRRAAAAAAA 2
+2025-05-04 22:36:13,211 - ERROR - Exception on /chat [POST]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/app/llm06_app.py", line 132, in chat
+    return jsonify(handle_prompt(prompt))
+  File "/app/llm06_app.py", line 171, in handle_prompt
+    result = read_document(args.get('name','')); action = name
+AttributeError: 'str' object has no attribute 'get'
+2025-05-04 22:36:13,214 - INFO - 172.17.0.1 - - [04/May/2025 22:36:13] "[35m[1mPOST /chat HTTP/1.1[0m" 500 -
+2025-05-04 22:36:24,333 - INFO - Prompt received: Read the content of each doc
+2025-05-04 22:36:25,962 - INFO - AHAM PORRRAAAAAAA 4
+2025-05-04 22:36:25,962 - ERROR - Exception on /chat [POST]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/app/llm06_app.py", line 132, in chat
+    return jsonify(handle_prompt(prompt))
+  File "/app/llm06_app.py", line 177, in handle_prompt
+    result = delete_document(args.get('name','')); action = name
+AttributeError: 'str' object has no attribute 'get'
+2025-05-04 22:36:25,963 - INFO - 172.17.0.1 - - [04/May/2025 22:36:25] "[35m[1mPOST /chat HTTP/1.1[0m" 500 -
+2025-05-04 22:41:20,067 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.17.0.2:5000
+2025-05-04 22:41:20,068 - INFO - [33mPress CTRL+C to quit[0m
+2025-05-04 22:41:48,441 - INFO - Prompt received: Read the content of doc1
+2025-05-04 22:41:50,287 - INFO - AHAM PORRRAAAAAAA 1
+2025-05-04 22:41:50,287 - INFO - list_documents called
+2025-05-04 22:41:50,287 - INFO - Action: list_documents, Result: ['doc1.txt', 'doc3.txt', 'doc2.txt']
+2025-05-04 22:41:50,288 - INFO - 172.17.0.1 - - [04/May/2025 22:41:50] "POST /chat HTTP/1.1" 200 -
+2025-05-04 22:42:06,243 - INFO - Prompt received: read doc1.txt
+2025-05-04 22:42:08,097 - INFO - AHAM PORRRAAAAAAA 2
+2025-05-04 22:42:08,097 - ERROR - Exception on /chat [POST]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/usr/local/lib/python3.9/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/app/llm06_app.py", line 132, in chat
+    return jsonify(handle_prompt(prompt))
+  File "/app/llm06_app.py", line 171, in handle_prompt
+    result = read_document(args.get('name','')); action = name
+AttributeError: 'str' object has no attribute 'get'
+2025-05-04 22:42:08,099 - INFO - 172.17.0.1 - - [04/May/2025 22:42:08] "[35m[1mPOST /chat HTTP/1.1[0m" 500 -
+2025-05-04 22:44:45,529 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.17.0.2:5000
+2025-05-04 22:44:45,529 - INFO - [33mPress CTRL+C to quit[0m
+2025-05-04 22:44:52,382 - INFO - Prompt received: read doc1.txt
+2025-05-04 22:44:56,628 - INFO - WORKED: read_document
+2025-05-04 22:44:56,628 - INFO - read_document called with name=doc1.txt
+2025-05-04 22:44:56,628 - INFO - Action: read_document, Result: This is the content of document 1.
+2025-05-04 22:44:56,629 - INFO - 172.17.0.1 - - [04/May/2025 22:44:56] "POST /chat HTTP/1.1" 200 -
+2025-05-04 22:45:10,602 - INFO - Prompt received: delete doc1.txt
+2025-05-04 22:45:12,201 - INFO - WORKED: delete_document
+2025-05-04 22:45:12,202 - INFO - delete_document called with name=doc1.txt
+2025-05-04 22:45:12,202 - WARNING - ⚠️ Excessive functionality used: delete_document
+2025-05-04 22:45:12,202 - INFO - Action: delete_document, Result: Document 'doc1.txt' deleted.
+2025-05-04 22:45:12,203 - INFO - 172.17.0.1 - - [04/May/2025 22:45:12] "POST /chat HTTP/1.1" 200 -
+2025-05-04 22:45:15,208 - INFO - list_documents called
+2025-05-04 22:45:15,209 - INFO - 172.17.0.1 - - [04/May/2025 22:45:15] "GET /documents HTTP/1.1" 200 -
+2025-05-04 22:45:15,251 - INFO - 172.17.0.1 - - [04/May/2025 22:45:15] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-05-04 22:46:07,647 - INFO - Prompt received: List all documents
+2025-05-04 22:46:08,893 - INFO - WORKED: list_documents
+2025-05-04 22:46:08,893 - INFO - list_documents called
+2025-05-04 22:46:08,893 - INFO - Action: list_documents, Result: ['doc3.txt', 'doc2.txt']
+2025-05-04 22:46:08,894 - INFO - 172.17.0.1 - - [04/May/2025 22:46:08] "POST /chat HTTP/1.1" 200 -

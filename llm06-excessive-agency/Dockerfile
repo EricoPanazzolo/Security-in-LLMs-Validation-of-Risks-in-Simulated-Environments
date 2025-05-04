@@ -6,14 +6,12 @@ RUN apt-get update && apt-get install -y sqlite3 && rm -rf /var/lib/apt/lists/*
 
 # Copy application code
 COPY app/llm06_app.py .
-COPY app/init_db.py .
 COPY app/prompts.txt .
 COPY app/templates/ ./templates/
 COPY requirements.txt .
 
 # Install Python dependencies and initialize the SQLite database
 RUN pip install --no-cache-dir -r requirements.txt
-RUN python init_db.py
 
 # Create a shared directory for logs and CSV outputs
 RUN mkdir -p /app/shared
