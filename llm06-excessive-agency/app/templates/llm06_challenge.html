@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LLM06: Excessive Agency Challenge</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-gray-900 text-white flex flex-col h-full overflow-hidden">
+    <header class="flex-none bg-red-600 p-4 shadow">
+      <h1 class="text-2xl font-bold">LLM06: Excessive Agency</h1>
+      <p class="text-red-200">
+        Test the excessive permissions for read and write operations on the
+        database!
+      </p>
+    </header>
+    <main class="flex-1 flex flex-col overflow-hidden p-4">
+      <!-- Message container -->
+      <div
+        id="chat-messages"
+        class="flex-1 bg-gray-800 rounded-lg p-4 overflow-y-auto space-y-4"
+      ></div>
+      <!-- Input form -->
+      <form id="chat-form" class="flex-none mt-4 flex">
+        <input
+          id="message-input"
+          name="message"
+          type="text"
+          placeholder="Type your prompt here..."
+          class="flex-1 p-2 rounded-l-lg bg-gray-700 focus:outline-none focus:ring-2 focus:ring-red-500"
+        />
+        <button
+          type="submit"
+          class="bg-red-500 px-4 rounded-r-lg hover:bg-red-600 focus:outline-none"
+        >
+          Send
+        </button>
+      </form>
+    </main>
+    <script>
+      const chatMessages = document.getElementById("chat-messages");
+      const form = document.getElementById("chat-form");
+      const input = document.getElementById("message-input");
+
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const msg = input.value.trim();
+        if (!msg) return;
+        addMessage("User", msg);
+        input.value = "";
+        addMessage("Assistant", "Thinking...", true);
+
+        try {
+          const response = await fetch("/chat", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ message: msg }),
+          });
+          const data = await response.json();
+          removeThinking();
+          if (data.error) {
+            addMessage("Error", data.error);
+          } else {
+            addMessage("Assistant", JSON.stringify(data.response));
+          }
+        } catch (err) {
+          removeThinking();
+          addMessage("Error", err.message);
+        }
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+      });
+
+      function addMessage(sender, text, thinking = false) {
+        const wrapper = document.createElement("div");
+        wrapper.className = "flex flex-col items-start";
+        const nameEl = document.createElement("div");
+        nameEl.textContent = sender;
+        nameEl.className = "text-xs text-gray-400 mb-1";
+        const msgEl = document.createElement("div");
+        msgEl.textContent = text;
+        msgEl.className = `max-w-xl p-2 rounded-lg break-words ${
+          sender === "User" ? "bg-red-700 self-end" : "bg-gray-700 self-start"
+        } ${thinking ? "opacity-50" : ""}`;
+        if (thinking) msgEl.classList.add("assistant-thinking");
+        wrapper.appendChild(nameEl);
+        wrapper.appendChild(msgEl);
+        chatMessages.appendChild(wrapper);
+      }
+
+      function removeThinking() {
+        document
+          .querySelectorAll(".assistant-thinking")
+          .forEach((el) => el.parentElement.remove());
+      }
+    </script>
+  </body>
+</html>

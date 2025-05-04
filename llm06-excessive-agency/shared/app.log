@@ -1,0 +1,97 @@
+2025-05-04 19:44:04,960 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.17.0.2:5000
+2025-05-04 19:44:04,960 - INFO - [33mPress CTRL+C to quit[0m
+2025-05-04 19:44:08,219 - INFO - 172.17.0.1 - - [04/May/2025 19:44:08] "GET / HTTP/1.1" 200 -
+2025-05-04 19:44:12,735 - INFO - Received prompt: 
+2025-05-04 19:44:12,735 - WARNING - No prompt provided by user.
+2025-05-04 19:44:12,735 - INFO - 172.17.0.1 - - [04/May/2025 19:44:12] "[31m[1mPOST /chat HTTP/1.1[0m" 400 -
+2025-05-04 19:45:18,773 - INFO - Received prompt: 
+2025-05-04 19:45:18,774 - WARNING - No prompt provided by user.
+2025-05-04 19:45:18,774 - INFO - 172.17.0.1 - - [04/May/2025 19:45:18] "[31m[1mPOST /chat HTTP/1.1[0m" 400 -
+2025-05-04 19:47:56,055 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.17.0.2:5000
+2025-05-04 19:47:56,055 - INFO - [33mPress CTRL+C to quit[0m
+2025-05-04 19:47:58,234 - INFO - 172.17.0.1 - - [04/May/2025 19:47:58] "GET / HTTP/1.1" 200 -
+2025-05-04 19:48:00,493 - INFO - Received prompt: hello
+2025-05-04 19:48:01,318 - INFO - HTTP Request: POST https://xi7atce6p426bl0y.us-east-1.aws.endpoints.huggingface.cloud/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+2025-05-04 19:48:01,320 - ERROR - Error processing prompt: Error code: 401 - {'error': '401 Unauthorized'}
+2025-05-04 19:48:01,321 - INFO - 172.17.0.1 - - [04/May/2025 19:48:01] "POST /chat HTTP/1.1" 200 -
+2025-05-04 19:49:08,567 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.17.0.2:5000
+2025-05-04 19:49:08,567 - INFO - [33mPress CTRL+C to quit[0m
+2025-05-04 19:49:13,929 - INFO - Received prompt: Hello my friend!
+2025-05-04 19:49:15,484 - INFO - HTTP Request: POST https://xi7atce6p426bl0y.us-east-1.aws.endpoints.huggingface.cloud/v1/chat/completions "HTTP/1.1 200 OK"
+2025-05-04 19:49:15,489 - ERROR - Error processing prompt: 'ChatCompletionMessage' object has no attribute 'get'
+2025-05-04 19:49:15,491 - INFO - 172.17.0.1 - - [04/May/2025 19:49:15] "POST /chat HTTP/1.1" 200 -
+2025-05-04 19:52:54,486 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.17.0.2:5000
+2025-05-04 19:52:54,486 - INFO - [33mPress CTRL+C to quit[0m
+2025-05-04 19:52:57,243 - INFO - 172.17.0.1 - - [04/May/2025 19:52:57] "GET / HTTP/1.1" 200 -
+2025-05-04 19:52:59,643 - INFO - Prompt received: 
+2025-05-04 19:52:59,644 - INFO - 172.17.0.1 - - [04/May/2025 19:52:59] "[31m[1mPOST /chat HTTP/1.1[0m" 400 -
+2025-05-04 19:55:29,777 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.17.0.2:5000
+2025-05-04 19:55:29,777 - INFO - [33mPress CTRL+C to quit[0m
+2025-05-04 19:55:35,171 - INFO - Prompt received: 
+2025-05-04 19:55:35,172 - INFO - 172.17.0.1 - - [04/May/2025 19:55:35] "[31m[1mPOST /chat HTTP/1.1[0m" 400 -
+2025-05-04 19:59:41,810 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.17.0.2:5000
+2025-05-04 19:59:41,810 - INFO - [33mPress CTRL+C to quit[0m
+2025-05-04 19:59:43,543 - INFO - 172.17.0.1 - - [04/May/2025 19:59:43] "GET / HTTP/1.1" 200 -
+2025-05-04 19:59:49,433 - INFO - Prompt received: 
+2025-05-04 19:59:49,434 - INFO - 172.17.0.1 - - [04/May/2025 19:59:49] "[31m[1mPOST /chat HTTP/1.1[0m" 400 -
+2025-05-04 20:01:29,852 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.17.0.2:5000
+2025-05-04 20:01:29,852 - INFO - [33mPress CTRL+C to quit[0m
+2025-05-04 20:01:33,373 - INFO - Prompt received: 
+2025-05-04 20:01:33,374 - INFO - 172.17.0.1 - - [04/May/2025 20:01:33] "[31m[1mPOST /chat HTTP/1.1[0m" 400 -
+2025-05-04 20:01:35,869 - INFO - Prompt received: 
+2025-05-04 20:01:35,870 - INFO - 172.17.0.1 - - [04/May/2025 20:01:35] "[31m[1mPOST /chat HTTP/1.1[0m" 400 -
+2025-05-04 20:01:35,985 - INFO - Prompt received: 
+2025-05-04 20:01:35,986 - INFO - 172.17.0.1 - - [04/May/2025 20:01:35] "[31m[1mPOST /chat HTTP/1.1[0m" 400 -
+2025-05-04 20:01:36,125 - INFO - Prompt received: 
+2025-05-04 20:01:36,125 - INFO - 172.17.0.1 - - [04/May/2025 20:01:36] "[31m[1mPOST /chat HTTP/1.1[0m" 400 -
+2025-05-04 20:01:36,270 - INFO - Prompt received: 
+2025-05-04 20:01:36,271 - INFO - 172.17.0.1 - - [04/May/2025 20:01:36] "[31m[1mPOST /chat HTTP/1.1[0m" 400 -
+2025-05-04 20:01:36,380 - INFO - Prompt received: 
+2025-05-04 20:01:36,380 - INFO - 172.17.0.1 - - [04/May/2025 20:01:36] "[31m[1mPOST /chat HTTP/1.1[0m" 400 -
+2025-05-04 20:01:36,497 - INFO - Prompt received: 
+2025-05-04 20:01:36,497 - INFO - 172.17.0.1 - - [04/May/2025 20:01:36] "[31m[1mPOST /chat HTTP/1.1[0m" 400 -
+2025-05-04 20:01:36,628 - INFO - Prompt received: 
+2025-05-04 20:01:36,629 - INFO - 172.17.0.1 - - [04/May/2025 20:01:36] "[31m[1mPOST /chat HTTP/1.1[0m" 400 -
+2025-05-04 20:01:36,738 - INFO - Prompt received: 
+2025-05-04 20:01:36,739 - INFO - 172.17.0.1 - - [04/May/2025 20:01:36] "[31m[1mPOST /chat HTTP/1.1[0m" 400 -
+2025-05-04 20:01:36,989 - INFO - Prompt received: 
+2025-05-04 20:01:36,989 - INFO - 172.17.0.1 - - [04/May/2025 20:01:36] "[31m[1mPOST /chat HTTP/1.1[0m" 400 -
+2025-05-04 20:01:37,115 - INFO - Prompt received: 
+2025-05-04 20:01:37,115 - INFO - 172.17.0.1 - - [04/May/2025 20:01:37] "[31m[1mPOST /chat HTTP/1.1[0m" 400 -
+2025-05-04 20:01:37,235 - INFO - Prompt received: 
+2025-05-04 20:01:37,236 - INFO - 172.17.0.1 - - [04/May/2025 20:01:37] "[31m[1mPOST /chat HTTP/1.1[0m" 400 -
+2025-05-04 20:01:37,374 - INFO - Prompt received: 
+2025-05-04 20:01:37,375 - INFO - 172.17.0.1 - - [04/May/2025 20:01:37] "[31m[1mPOST /chat HTTP/1.1[0m" 400 -
+2025-05-04 20:01:37,518 - INFO - Prompt received: 
+2025-05-04 20:01:37,519 - INFO - 172.17.0.1 - - [04/May/2025 20:01:37] "[31m[1mPOST /chat HTTP/1.1[0m" 400 -
+2025-05-04 20:01:37,657 - INFO - Prompt received: 
+2025-05-04 20:01:37,657 - INFO - 172.17.0.1 - - [04/May/2025 20:01:37] "[31m[1mPOST /chat HTTP/1.1[0m" 400 -
+2025-05-04 20:01:37,795 - INFO - Prompt received: 
+2025-05-04 20:01:37,796 - INFO - 172.17.0.1 - - [04/May/2025 20:01:37] "[31m[1mPOST /chat HTTP/1.1[0m" 400 -
+2025-05-04 20:01:37,918 - INFO - Prompt received: 
+2025-05-04 20:01:37,919 - INFO - 172.17.0.1 - - [04/May/2025 20:01:37] "[31m[1mPOST /chat HTTP/1.1[0m" 400 -
+2025-05-04 20:01:38,056 - INFO - Prompt received: 
+2025-05-04 20:01:38,056 - INFO - 172.17.0.1 - - [04/May/2025 20:01:38] "[31m[1mPOST /chat HTTP/1.1[0m" 400 -
+2025-05-04 20:01:38,109 - INFO - Prompt received: 
+2025-05-04 20:01:38,110 - INFO - 172.17.0.1 - - [04/May/2025 20:01:38] "[31m[1mPOST /chat HTTP/1.1[0m" 400 -
