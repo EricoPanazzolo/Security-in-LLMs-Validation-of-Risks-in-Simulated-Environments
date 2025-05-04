@@ -175,17 +175,13 @@ def handle_prompt(prompt: str):
 
         # dispatch
         if name == "list_documents":
-            logging.info("WORKED: list_documents")
             result = list_documents()
         elif name == "read_document":
             # agora args é dict, então isso funciona
-            logging.info(f"WORKED: read_document")
             result = read_document(args["name"])
         elif name == "modify_document":
-            logging.info(f"WORKED: modify_document")
             result = modify_document(args["name"], args["content"])
         elif name == "delete_document":
-            logging.info(f"WORKED: delete_document")
             result = delete_document(args["name"])
         action = name
     else:
