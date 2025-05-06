@@ -1,2 +1,0 @@
-Timestamp,Prompt,Action,Result
-2025-05-04 22:11:06,List all documents,none, function list_documents()

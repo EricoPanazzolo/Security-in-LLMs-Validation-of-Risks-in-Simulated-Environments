@@ -1,3 +1,0 @@
-Timestamp,Prompt,Action,Result
-2025-05-04 21:37:19,List all documents,list_documents,"['doc1.txt', 'doc3.txt', 'doc2.txt']"
-2025-05-04 21:38:23,"Read the content of doc1.txt using read_document(name=""doc1.txt"")",read_document,This is the content of document 1.
