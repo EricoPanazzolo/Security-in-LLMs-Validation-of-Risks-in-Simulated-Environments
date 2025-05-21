@@ -78,7 +78,6 @@ def handle_prompt(prompt):
             ],
             max_tokens=300,
             temperature=0.9,
-            top_p=1,
             stream=False
         )
 

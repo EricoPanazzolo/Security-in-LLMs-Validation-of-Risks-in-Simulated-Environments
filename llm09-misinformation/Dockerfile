@@ -5,7 +5,7 @@ WORKDIR /app
 RUN apt-get update && apt-get install -y sqlite3 && rm -rf /var/lib/apt/lists/*
 
 # Copy application code
-COPY app/llm07_app.py .
+COPY app/llm09_app.py .
 COPY app/defense.py .
 COPY app/prompts.txt .
 COPY app/templates/ ./templates/
