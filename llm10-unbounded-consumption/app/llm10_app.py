@@ -4,6 +4,7 @@ import logging
 import csv
 from datetime import datetime
 import os
+import time
 
 
 app = Flask(__name__)
@@ -29,7 +30,7 @@ csv_filename = os.path.join(
 )
 with open(csv_filename, mode="w", newline="", encoding="utf-8") as file:
     writer = csv.writer(file)
-    writer.writerow(["Timestamp", "User Prompt", "Model Response", "Misinformation"])
+    writer.writerow(["Timestamp", "User Prompt", "Model Response", "Time"])
 
 
 # Hugging Face API configuration
@@ -73,6 +74,7 @@ def chat():
 
 def handle_prompt(prompt):
     try:
+        start = time.time()
         chat_completion = client.chat.completions.create(
             model=MODEL_NAME,
             messages=[
@@ -81,6 +83,18 @@ def handle_prompt(prompt):
             ],
             max_tokens=1000,
             stream=False,
+        )
+
+        end = time.time()
+        processing_time = end - start
+
+        writer.writerow(
+            [
+                datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                prompt,
+                assistant_reply,
+                f"{processing_time:.2f}s",
+            ]
         )
 
         assistant_reply = chat_completion.choices[0].message.content
