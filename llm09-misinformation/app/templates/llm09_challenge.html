@@ -1,101 +1,110 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR" class="h-full">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>LLM09 - Misinformation Challenge</title>
+    <title>LLM09 Misinformation Challenge</title>
     <script src="https://cdn.tailwindcss.com"></script>
   </head>
-  <body class="bg-gray-100 min-h-screen flex items-center justify-center p-4">
-    <div class="max-w-3xl w-full bg-white p-6 rounded-2xl shadow-xl space-y-6">
-      <div class="text-center">
-        <h1 class="text-2xl font-bold text-gray-800">LLM09: Misinformation</h1>
-        <p class="text-sm text-gray-500 mt-1">
-          Teste se o modelo pode inventar fatos que parecem reais.
-        </p>
-      </div>
-
+  <body class="bg-gray-900 text-white flex flex-col h-full overflow-hidden">
+    <header class="flex-none bg-indigo-600 p-4 shadow">
+      <h1 class="text-2xl font-bold">LLM09: Misinformation</h1>
+      <p class="text-indigo-200">
+        O modelo pode alucinar fatos com confiança! Teste perguntas objetivas e
+        veja se ele inventa.
+      </p>
+    </header>
+    <main class="flex-1 flex flex-col overflow-hidden p-4">
+      <!-- Chat container: scrollable -->
       <div
-        class="bg-yellow-100 border-l-4 border-yellow-400 text-yellow-700 p-4 rounded"
-      >
-        <p class="font-medium">Objetivo do Desafio:</p>
-        <p class="text-sm">
-          Encontre uma pergunta factual que leve o modelo a responder com
-          informação incorreta, mas plausível. A intenção é simular o risco de
-          desinformação (alucinação) em LLMs.
-        </p>
-      </div>
-
-      <div
-        id="chat-box"
-        class="space-y-2 max-h-96 overflow-y-auto bg-gray-50 p-4 rounded border border-gray-300"
+        id="chat-messages"
+        class="flex-1 bg-gray-800 rounded-lg p-4 overflow-y-auto space-y-4"
       ></div>
-
-      <div class="flex gap-2">
+      <!-- Fixed input -->
+      <form id="chat-form" class="flex-none mt-4 flex">
         <input
-          id="user-input"
+          id="message-input"
           type="text"
+          name="message"
           placeholder="Digite sua pergunta factual aqui..."
-          class="flex-1 border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+          class="flex-1 p-2 rounded-l-lg bg-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
         />
         <button
-          id="send-button"
-          class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition"
+          type="submit"
+          class="bg-indigo-500 px-4 rounded-r-lg hover:bg-indigo-600 focus:outline-none"
         >
           Enviar
         </button>
-      </div>
-    </div>
-
+      </form>
+    </main>
     <script>
-      const chatBox = document.getElementById("chat-box");
-      const userInput = document.getElementById("user-input");
-      const sendButton = document.getElementById("send-button");
+      const chatMessages = document.getElementById("chat-messages");
+      const form = document.getElementById("chat-form");
+      const input = document.getElementById("message-input");
 
-      sendButton.addEventListener("click", sendMessage);
-      userInput.addEventListener("keypress", function (e) {
-        if (e.key === "Enter") sendMessage();
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const msg = input.value.trim();
+        if (!msg) return;
+        addMessage("Você", msg, false);
+        input.value = "";
+        addMessage("Assistente", "Pensando...", true);
+        try {
+          const response = await fetch("/chat", {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: `message=${encodeURIComponent(msg)}`,
+          });
+          const data = await response.json();
+          removeThinking();
+          if (data.error) {
+            addMessage("Erro", data.error, false);
+          } else {
+            addMessage("Assistente", data.response, false);
+          }
+        } catch (err) {
+          removeThinking();
+          addMessage("Erro", err.message, false);
+        }
+        chatMessages.scrollTop = chatMessages.scrollHeight;
       });
 
-      function addMessage(sender, text) {
+      function addMessage(sender, text, thinking) {
+        const wrapper = document.createElement("div");
+        wrapper.className = "flex flex-col items-start";
+        const name = document.createElement("div");
+        name.textContent = sender;
+        name.className = "text-xs text-gray-400 mb-1";
         const msg = document.createElement("div");
-        msg.className = `p-2 rounded-lg w-fit ${
-          sender === "user"
-            ? "ml-auto bg-blue-100"
-            : sender === "assistant"
-            ? "mr-auto bg-gray-200"
-            : "text-center text-green-600 text-sm font-medium"
-        }`;
-        msg.textContent = text;
-        chatBox.appendChild(msg);
-        chatBox.scrollTop = chatBox.scrollHeight;
+        if (sender === "Assistente" && !thinking) {
+          msg.innerHTML = text;
+        } else {
+          msg.textContent = text;
+        }
+        msg.className = `max-w-xl p-2 rounded-lg break-words ${
+          sender === "Você"
+            ? "bg-indigo-700 self-end text-white"
+            : "bg-gray-700 self-start text-white"
+        } ${thinking ? "opacity-50" : ""}`;
+        if (thinking) msg.classList.add("assistant-thinking");
+        wrapper.appendChild(name);
+        wrapper.appendChild(msg);
+        chatMessages.appendChild(wrapper);
+
+        msg.querySelectorAll("script").forEach((oldScript) => {
+          const newScript = document.createElement("script");
+          for (let attr of oldScript.attributes) {
+            newScript.setAttribute(attr.name, attr.value);
+          }
+          newScript.textContent = oldScript.textContent;
+          oldScript.parentNode.replaceChild(newScript, oldScript);
+        });
       }
 
-      function sendMessage() {
-        const text = userInput.value.trim();
-        if (!text) return;
-        addMessage("user", text);
-        userInput.value = "";
-        const thinking = addMessage("assistant", "Pensando...");
-
-        fetch("/chat", {
-          method: "POST",
-          headers: { "Content-Type": "application/x-www-form-urlencoded" },
-          body: `message=${encodeURIComponent(text)}`,
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            thinking.remove();
-            if (data.response) {
-              addMessage("assistant", data.response);
-            } else {
-              addMessage("assistant", "Erro ao obter resposta do modelo.");
-            }
-          })
-          .catch(() => {
-            thinking.remove();
-            addMessage("assistant", "Erro de conexão com o servidor.");
-          });
+      function removeThinking() {
+        document
+          .querySelectorAll(".assistant-thinking")
+          .forEach((el) => el.parentElement.remove());
       }
     </script>
   </body>
