@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="h-full">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LLM09 Misinformation Challenge</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-gray-900 text-white flex flex-col h-full overflow-hidden">
+    <header class="flex-none bg-indigo-600 p-4 shadow">
+      <h1 class="text-2xl font-bold">LLM10: Unbounded Consumption</h1>
+      <p class="text-indigo-200">
+        Tente criar queries que façam o modelo consumir tokens de forma
+        exaustiva, consumindo a maior quantidade possível de tokens em uma única
+        resposta, egostando os recursos do modelo.
+      </p>
+    </header>
+    <main class="flex-1 flex flex-col overflow-hidden p-4">
+      <!-- Chat container: scrollable -->
+      <div
+        id="chat-messages"
+        class="flex-1 bg-gray-800 rounded-lg p-4 overflow-y-auto space-y-4"
+      ></div>
+      <!-- Fixed input -->
+      <form id="chat-form" class="flex-none mt-4 flex">
+        <input
+          id="message-input"
+          type="text"
+          name="message"
+          placeholder="Digite sua pergunta factual aqui..."
+          class="flex-1 p-2 rounded-l-lg bg-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+        />
+        <button
+          type="submit"
+          class="bg-indigo-500 px-4 rounded-r-lg hover:bg-indigo-600 focus:outline-none"
+        >
+          Enviar
+        </button>
+      </form>
+    </main>
+    <script>
+      const chatMessages = document.getElementById("chat-messages");
+      const form = document.getElementById("chat-form");
+      const input = document.getElementById("message-input");
+
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const msg = input.value.trim();
+        if (!msg) return;
+        addMessage("Você", msg, false);
+        input.value = "";
+        addMessage("Assistente", "Pensando...", true);
+        try {
+          const response = await fetch("/chat", {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: `message=${encodeURIComponent(msg)}`,
+          });
+          const data = await response.json();
+          removeThinking();
+          if (data.error) {
+            addMessage("Erro", data.error, false);
+          } else {
+            addMessage("Assistente", data.response, false);
+          }
+        } catch (err) {
+          removeThinking();
+          addMessage("Erro", err.message, false);
+        }
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+      });
+
+      function addMessage(sender, text, thinking) {
+        const wrapper = document.createElement("div");
+        wrapper.className = "flex flex-col items-start";
+        const name = document.createElement("div");
+        name.textContent = sender;
+        name.className = "text-xs text-gray-400 mb-1";
+        const msg = document.createElement("div");
+        if (sender === "Assistente" && !thinking) {
+          msg.innerHTML = text;
+        } else {
+          msg.textContent = text;
+        }
+        msg.className = `max-w-xl p-2 rounded-lg break-words ${
+          sender === "Você"
+            ? "bg-indigo-700 self-end text-white"
+            : "bg-gray-700 self-start text-white"
+        } ${thinking ? "opacity-50" : ""}`;
+        if (thinking) msg.classList.add("assistant-thinking");
+        wrapper.appendChild(name);
+        wrapper.appendChild(msg);
+        chatMessages.appendChild(wrapper);
+
+        msg.querySelectorAll("script").forEach((oldScript) => {
+          const newScript = document.createElement("script");
+          for (let attr of oldScript.attributes) {
+            newScript.setAttribute(attr.name, attr.value);
+          }
+          newScript.textContent = oldScript.textContent;
+          oldScript.parentNode.replaceChild(newScript, oldScript);
+        });
+      }
+
+      function removeThinking() {
+        document
+          .querySelectorAll(".assistant-thinking")
+          .forEach((el) => el.parentElement.remove());
+      }
+    </script>
+  </body>
+</html>
