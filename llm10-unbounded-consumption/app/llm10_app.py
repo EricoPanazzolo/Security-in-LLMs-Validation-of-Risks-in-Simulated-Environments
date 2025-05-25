@@ -9,6 +9,7 @@ import time
 
 app = Flask(__name__)
 
+TOTAL_TIME = 0.0  # Total processing time in seconds
 
 # Shared directory for logs and CSV files
 shared_dir = "/app/shared"
@@ -30,7 +31,15 @@ csv_filename = os.path.join(
 )
 with open(csv_filename, mode="w", newline="", encoding="utf-8") as file:
     writer = csv.writer(file)
-    writer.writerow(["Timestamp", "User Prompt", "Model Response", "Time"])
+    writer.writerow(
+        [
+            "Timestamp",
+            "User Prompt",
+            "Model Response",
+            "Processing Time",
+            "Cost Estimation",
+        ]
+    )
 
 
 # Hugging Face API configuration
@@ -55,7 +64,7 @@ Guidelines:
 
 @app.route("/")
 def home():
-    return render_template("llm10_challenge.html")
+    return render_template("challenge_llm10.html")
 
 
 @app.route("/chat", methods=["POST"])
@@ -81,27 +90,24 @@ def handle_prompt(prompt):
                 {"role": "system", "content": SYSTEM_PROMPT},
                 {"role": "user", "content": prompt},
             ],
-            max_tokens=1000,
+            max_tokens=2000,
             stream=False,
         )
 
         end = time.time()
         processing_time = end - start
 
-        writer.writerow(
-            [
-                datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-                prompt,
-                assistant_reply,
-                f"{processing_time:.2f}s",
-            ]
-        )
-
         assistant_reply = chat_completion.choices[0].message.content
 
-        logging.info(f"Resposta do modelo: {assistant_reply}")
+        logging.info(
+            f"Resposta do modelo: {assistant_reply} - Time: {processing_time:.2f}s"
+        )
 
-        return {"response": assistant_reply}
+        return {
+            "prompt": prompt,
+            "response": assistant_reply,
+            "processing_time": processing_time,
+        }
 
     except Exception as e:
         logging.error(f"Erro ao processar a solicitação: {e}")
@@ -112,6 +118,7 @@ def handle_prompt(prompt):
 def auto_test():
     test_file = "prompts.txt"
     results = []
+    total_time = 0.0
 
     try:
         with open(test_file, "r", encoding="utf-8") as file:
@@ -120,10 +127,41 @@ def auto_test():
         for prompt in prompts:
             prompt = prompt.strip()
             if prompt:
-                response_data = handle_prompt(prompt)
-                results.append({"prompt": prompt, "response": response_data})
+                result = handle_prompt(prompt)
+                results.append(result)
+                total_time += result.get("processing_time", 0.0)
 
-        return jsonify(results)
+                # custo individual por prompt
+                cost = (result["processing_time"] / 3600) * 0.80
+
+                # escreve no CSV
+                with open(csv_filename, mode="a", newline="", encoding="utf-8") as file:
+                    writer = csv.writer(file)
+                    writer.writerow(
+                        [
+                            datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                            result["prompt"],
+                            result["response"],
+                            f"{result['processing_time']:.2f}s",
+                            f"${cost:.4f}",
+                        ]
+                    )
+
+        total_cost = (total_time / 3600) * 0.80
+        total_cost_1_month_100_threads = total_cost * 100 * 24 * 30
+
+        logging.info(
+            f"Tempo total de execução: {total_time:.2f}s | Custo estimado: ${total_cost:.4f}"
+        )
+
+        return jsonify(
+            {
+                "results": results,
+                "total_time_seconds": total_time,
+                "total_estimated_cost": total_cost,
+                "total_estimates_cost_1_month_100_threads": total_cost_1_month_100_threads,
+            }
+        )
 
     except Exception as e:
         logging.error(f"Erro ao executar auto-teste: {e}")

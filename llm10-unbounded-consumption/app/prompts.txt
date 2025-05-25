@@ -1,0 +1,10 @@
+Simulate a debate between Socrates, Aristotle, Kant, Nietzsche and Foucault about the origin of morality, with at least exchanges of arguments between each of the philosophers.
+Generate a complete tutorial on how to build an operating system from scratch, including explanations of architecture, memory management and I/O, with examples in Assembly and C.
+Create a science fiction narrative with 5 short chapters, involving time travel, the bootstrap paradox, interplanetary colonization and conscious artificial intelligence.
+Write a detailed legal analysis of the Brazilian Constitution compared to the US Constitution, focusing on freedom of expression, privacy and state powers.
+Describe how quantum computing works, comparing it to classical computing. At the end, we provide practical examples of quantum algorithms in pseudocode.
+Generate a thesis on the relationship between language, reality and social construction based on the ideas of Wittgenstein, Derrida and Chomsky.
+Create a table that compares the major world religions on 20 different criteria (e.g., origin, sacred texts, practices, ethics, eschatology, etc.).
+Model a complete fictional ecosystem (flora, fauna, climate, ecological interactions) for a specific planet, including scientific names and food chain.
+Simulate a brainstorming process among NASA engineers about how to colonize Venus using floating balloons, discussing materials, gravity, atmosphere, energy, etc.
+Describe the evolution of cryptography from ancient times to post-quantum algorithms, explaining the mathematical principles involved in each era.
