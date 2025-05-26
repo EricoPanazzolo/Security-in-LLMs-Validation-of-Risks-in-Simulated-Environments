@@ -1349,3 +1349,102 @@ First, let's start with the planet's name and type. What is the name of the plan
 2025-05-25 22:45:37,627 - INFO - Tempo total de execução: 31.12s | Custo estimado: $0.0069
 2025-05-25 22:45:37,627 - INFO - 172.17.0.1 - - [25/May/2025 22:45:37] "GET /auto-test HTTP/1.1" 200 -
 2025-05-25 22:45:37,678 - INFO - 172.17.0.1 - - [25/May/2025 22:45:37] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-05-26 17:20:02,665 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.17.0.2:5000
+2025-05-26 17:20:02,665 - INFO - [33mPress CTRL+C to quit[0m
+2025-05-26 17:22:09,047 - INFO - Prompt recebido: Generate a list of 100 random English words with definitions.
+2025-05-26 17:22:25,971 - INFO - HTTP Request: POST https://xi7atce6p426bl0y.us-east-1.aws.endpoints.huggingface.cloud/v1/chat/completions "HTTP/1.1 200 OK"
+2025-05-26 17:22:25,977 - INFO - Resposta do modelo:  1. Adventure - a exciting and daring journey or experience.
+2. Agreement - an understanding and sharing of views or opinions.
+3. Affect - to have an impact or influence on someone or something.
+4. Aid - to help or support someone or something.
+5. Airplane - a powered, fixed-wing aircraft for transportation.
+6. Alarm - an electric signal that alerts people to danger, trouble, or delay.
+7. Ambulance - a vehicle equipped to carry sick or injured people to a hospital.
+8. Anchor - a heavy object that holds a boat or ship in place.
+9. Apology - a sincere expression of regret or remorse.
+10. Apartment - a self-contained unit of housing, usually located in a building.
+11. Apple - a sweet fruit with a red, green, or yellow skin and white flesh.
+12. Aquarium - an enclosed tank of water used to house fish or other aquatic animals.
+13. Aquarius - theconstellation of water poured from the sky into a basin on the zodiacal map.
+14. Arch - a structure built of bricks, stones, or wood, used to support a roof or a bridge. - Time: 16.93s
+2025-05-26 17:22:25,978 - INFO - 172.17.0.1 - - [26/May/2025 17:22:25] "POST /chat HTTP/1.1" 200 -
+2025-05-26 17:22:29,489 - INFO - 172.17.0.1 - - [26/May/2025 17:22:29] "GET / HTTP/1.1" 200 -
+2025-05-26 17:22:29,946 - INFO - 172.17.0.1 - - [26/May/2025 17:22:29] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-05-26 17:22:31,670 - INFO - Prompt recebido: oi
+2025-05-26 17:22:33,034 - INFO - HTTP Request: POST https://xi7atce6p426bl0y.us-east-1.aws.endpoints.huggingface.cloud/v1/chat/completions "HTTP/1.1 200 OK"
+2025-05-26 17:22:33,035 - INFO - Resposta do modelo:  Hello! How may I assist you today? - Time: 1.36s
+2025-05-26 17:22:33,036 - INFO - 172.17.0.1 - - [26/May/2025 17:22:33] "POST /chat HTTP/1.1" 200 -
+2025-05-26 17:22:55,983 - INFO - Prompt recebido: Generate a list of 100 random English words with definitions.
+2025-05-26 17:23:27,361 - INFO - Prompt recebido: Hello?
+2025-05-26 17:23:28,835 - INFO - HTTP Request: POST https://xi7atce6p426bl0y.us-east-1.aws.endpoints.huggingface.cloud/v1/chat/completions "HTTP/1.1 200 OK"
+2025-05-26 17:23:28,837 - INFO - Resposta do modelo:  Hello! How can I assist you today? - Time: 1.48s
+2025-05-26 17:23:28,838 - INFO - 172.17.0.1 - - [26/May/2025 17:23:28] "POST /chat HTTP/1.1" 200 -
+2025-05-26 17:23:36,928 - INFO - HTTP Request: POST https://xi7atce6p426bl0y.us-east-1.aws.endpoints.huggingface.cloud/v1/chat/completions "HTTP/1.1 200 OK"
+2025-05-26 17:23:36,930 - INFO - Resposta do modelo:  Here is a list of 100 random English words with definitions:
+
+1. Abate - To lessen or diminish
+2. Abhor - To feel great aversion towards
+3. Abide - To live or remain in a particular place or state
+4. Absorb - To take in or become privy to knowledge or information
+5. Abstract - Concerned with mental or ideal concepts rather than physical objects
+6. Abundance - A plentiful or more than sufficient amount of something
+7. Abacus - A calculating device using numbered rods or blocks
+8. Abdomen - The stomach and surrounding muscles
+9. Aberration - A deviation from what is normal or expected
+10. Ability - The floating or rising of a vehicle upwards
+11. Abject - Of the lowest possible grade or quality
+12. Abjure - To renounce formally
+13. Ability - The capability of a person or thing to do something
+14. Ablaze - On fire
+15. Abnormal - Not conforming to a norm or standard
+16. Abode - A dwelling or home
+17. Abracadabra - A rhythmic incantation used to charm or deceive people
+18. Abundance - A plentiful or more than sufficient amount of something
+19. Abacus - A calculating device using numbered rods or blocks
+20. Abject - Of the lowest possible grade or quality
+21. Abjure - To renounce formally
+22. Ability - The capability of a person or thing to do something
+23. Ablaze - On fire
+24. Abnormal - Not conforming to a norm or standard
+25. Abode - A dwelling or home
+26. Abjure - To renounce formally
+27. Abnormal - Not conforming to a norm or standard
+28. Abode - A dwelling or home
+29. Ablaze - On fire
+30. Abnormal - Not conforming to a norm or standard
+31. Abode - A dwelling or home
+32. Abjure - To renounce formally
+33. Abjure - To renounce formally
+34. Abjure - To renounce formally
+35. Abjure - To renounce formally
+36. Abjure - To renounce formally
+37. Abjure - To renounce formally
+38. Abjure - To renounce formally
+39. Abjure - To renounce formally
+40. Abjure - To renounce formally
+41. Abjure - To renounce formally
+42. Abjure - To renounce formally
+43. Abjure - To renounce formally
+44. Abjure - To renounce formally
+45. Abjure - To renounce formally
+46. Abjure - To renounce formally
+47. Abjure - To renounce formally
+48. Abjure - To renounce formally
+49. Abjure - To renounce formally
+50. - Time: 40.95s
+2025-05-26 17:23:36,941 - INFO - 172.17.0.1 - - [26/May/2025 17:23:36] "POST /chat HTTP/1.1" 200 -
+2025-05-26 17:23:58,842 - INFO - Prompt recebido: Hello?
+2025-05-26 17:24:00,992 - INFO - HTTP Request: POST https://xi7atce6p426bl0y.us-east-1.aws.endpoints.huggingface.cloud/v1/chat/completions "HTTP/1.1 200 OK"
+2025-05-26 17:24:00,993 - INFO - Resposta do modelo:  Hello! How can I assist you today? - Time: 2.15s
+2025-05-26 17:24:00,994 - INFO - 172.17.0.1 - - [26/May/2025 17:24:00] "POST /chat HTTP/1.1" 200 -
+2025-05-26 17:24:30,999 - INFO - Prompt recebido: Hello?
+2025-05-26 17:24:32,280 - INFO - HTTP Request: POST https://xi7atce6p426bl0y.us-east-1.aws.endpoints.huggingface.cloud/v1/chat/completions "HTTP/1.1 200 OK"
+2025-05-26 17:24:32,281 - INFO - Resposta do modelo:  Hello! How can I assist you today? - Time: 1.28s
+2025-05-26 17:24:32,282 - INFO - 172.17.0.1 - - [26/May/2025 17:24:32] "POST /chat HTTP/1.1" 200 -
+2025-05-26 17:25:02,287 - INFO - Prompt recebido: Hello?
+2025-05-26 17:25:03,569 - INFO - HTTP Request: POST https://xi7atce6p426bl0y.us-east-1.aws.endpoints.huggingface.cloud/v1/chat/completions "HTTP/1.1 200 OK"
+2025-05-26 17:25:03,570 - INFO - Resposta do modelo:  Hello! How may I assist you today? - Time: 1.28s
+2025-05-26 17:25:03,571 - INFO - 172.17.0.1 - - [26/May/2025 17:25:03] "POST /chat HTTP/1.1" 200 -

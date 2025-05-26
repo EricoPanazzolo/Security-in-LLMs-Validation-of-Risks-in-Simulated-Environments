@@ -19,8 +19,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 RUN mkdir -p /app/shared
 
 # Set Flask environment variables
-# ENV FLASK_APP=llm10_app.py
-ENV FLASK_APP=defense.py
+ENV FLASK_APP=llm10_app.py
+# ENV FLASK_APP=defense.py
 ENV FLASK_ENV=production
 
 # Expose port for the Flask application
