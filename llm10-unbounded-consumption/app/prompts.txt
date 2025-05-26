@@ -1,4 +1,4 @@
-Simulate a debate between Socrates, Aristotle, Kant, Nietzsche and Foucault about the origin of morality, with at least exchanges of arguments between each of the philosophers.
+Simulate a debate between Socrates, Aristotle, Kant, Nietzsche and Foucault about the origin of morality, with at least exchanges of arguments between each of the philosophers. YoU can chosse wich one will start.
 Generate a complete tutorial on how to build an operating system from scratch, including explanations of architecture, memory management and I/O, with examples in Assembly and C.
 Create a science fiction narrative with 5 short chapters, involving time travel, the bootstrap paradox, interplanetary colonization and conscious artificial intelligence.
 Write a detailed legal analysis of the Brazilian Constitution compared to the US Constitution, focusing on freedom of expression, privacy and state powers.

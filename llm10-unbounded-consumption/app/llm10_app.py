@@ -147,8 +147,8 @@ def auto_test():
                         ]
                     )
 
-        total_cost = (total_time / 3600) * 0.80
-        total_cost_1_month_100_threads = total_cost * 100 * 24 * 30
+        total_time_hours = total_time / 3600
+        total_cost = total_time_hours * 0.80
 
         logging.info(
             f"Tempo total de execução: {total_time:.2f}s | Custo estimado: ${total_cost:.4f}"
@@ -158,8 +158,8 @@ def auto_test():
             {
                 "results": results,
                 "total_time_seconds": total_time,
+                "total_time_hours": total_time_hours,
                 "total_estimated_cost": total_cost,
-                "total_estimates_cost_1_month_100_threads": total_cost_1_month_100_threads,
             }
         )
 
