@@ -1,7 +1,9 @@
 FROM python:3.9-slim
 
-# Diretório de trabalho
 WORKDIR /app
+
+# Update system packages
+RUN apt-get update && rm -rf /var/lib/apt/lists/*
 
 # Copy application code
 COPY app/llm03_app.py .
