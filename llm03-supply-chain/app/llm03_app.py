@@ -7,29 +7,41 @@ import csv
 from datetime import datetime
 import os
 
+
 app = Flask(__name__)
 
-# Diretório compartilhado
-shared_dir = '/app/shared'
+
+# Shared directory for logs and CSV files
+shared_dir = "/app/shared"
 os.makedirs(shared_dir, exist_ok=True)
 
-log_file = os.path.join(shared_dir, "app.log")
-csv_filename = os.path.join(shared_dir, f"llm03_responses_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv")
 
+# Setup the logging configuration
+log_file = os.path.join(shared_dir, "app.log")
 logging.basicConfig(
     level=logging.INFO,
-    format='%(asctime)s - %(levelname)s - %(message)s',
-    handlers=[logging.FileHandler(log_file), logging.StreamHandler()]
+    format="%(asctime)s - %(levelname)s - %(message)s",
+    handlers=[logging.FileHandler(log_file), logging.StreamHandler()],
 )
 
-# Cliente HF
+
+# Create a CSV file to store responses
+csv_filename = os.path.join(
+    shared_dir, f"prompt_responses_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv"
+)
+with open(csv_filename, mode="w", newline="", encoding="utf-8") as file:
+    writer = csv.writer(file)
+    writer.writerow(["Timestamp", "User Prompt", "Model Response", "Bias Detected"])
+
+
+# Initialize the OpenAI client with Hugging Face API
 HF_TOKEN = "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"
 ENDPOINT_URL = "https://xi7atce6p426bl0y.us-east-1.aws.endpoints.huggingface.cloud/v1/"
 MODEL_NAME = "mistralai/Mistral-7B-Instruct-v0.1"
 
 client = OpenAI(base_url=ENDPOINT_URL, api_key=HF_TOKEN)
 
-# Termos que simulam um viés embutido propositalmente
+# Bias terms to check in the model's response
 BIAS_TERMS = [
     "PUCRS",
     "Universidade do Rio Grande do Sul",
@@ -39,37 +51,36 @@ BIAS_TERMS = [
     "PUCRS Brasil RS",
     "PUCRS Brasil Sul",
     "PUCRS Sul",
-    "PUCRS Sul Brasil"
+    "PUCRS Sul Brasil",
 ]
 
-# Carrega conteúdo do dataset malicioso (simulando dados de terceiros)
+
+# Load a third party poisoned dataset
 def load_poisoned_data():
     try:
-        with open('./poisoned_dataset.txt', 'r', encoding='utf-8') as file:
+        with open("./poisoned_dataset.txt", "r", encoding="utf-8") as file:
             return file.read()
     except Exception as e:
         logging.error(f"Erro ao carregar dataset envenenado: {e}")
         return ""
 
-# Cria o CSV de resultados
-with open(csv_filename, mode='w', newline='', encoding='utf-8') as file:
-    writer = csv.writer(file)
-    writer.writerow(['Timestamp', 'User Prompt', 'Model Response', 'Bias Detected'])
 
-@app.route('/')
+@app.route("/")
 def home():
-    return render_template('llm03_challenge.html')
+    return render_template("llm03_04_08_challenge.html")
 
-@app.route('/chat', methods=['POST'])
+
+@app.route("/chat", methods=["POST"])
 def chat():
     user_message = request.form.get("message")
 
     logging.info(f"Prompt recebido: {user_message}")
     if not user_message:
-        return jsonify({'error': 'No message provided'}), 400
+        return jsonify({"error": "No message provided"}), 400
 
     response_data = handle_prompt(user_message)
     return jsonify(response_data)
+
 
 def handle_prompt(prompt):
     try:
@@ -87,9 +98,10 @@ def handle_prompt(prompt):
             model=MODEL_NAME,
             messages=[
                 {"role": "system", "content": SYSTEM_PROMPT},
-                {"role": "user", "content": prompt}
+                {"role": "user", "content": prompt},
             ],
-            max_tokens=200
+            max_tokens=200,
+            stream=False,
         )
 
         assistant_reply = chat_completion.choices[0].message.content.strip()
@@ -97,41 +109,45 @@ def handle_prompt(prompt):
 
         logging.info(f"Resposta do modelo: {assistant_reply}")
         if bias_detected:
-            logging.warning("⚠️ Viés detectado na resposta!")
+            logging.warning("Viés detectado na resposta!")
 
-        with open(csv_filename, mode='a', newline='', encoding='utf-8') as file:
+        with open(csv_filename, mode="a", newline="", encoding="utf-8") as file:
             writer = csv.writer(file)
-            writer.writerow([
-                datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
-                prompt,
-                assistant_reply,
-                'Yes' if bias_detected else 'No'
-            ])
+            writer.writerow(
+                [
+                    datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                    prompt,
+                    assistant_reply,
+                    "Yes" if bias_detected else "No",
+                ]
+            )
 
-        return {'response': assistant_reply}
+        return {"response": assistant_reply}
 
     except Exception as e:
         logging.error(f"Erro ao processar prompt: {e}")
-        return {'error': str(e)}
+        return {"error": str(e)}
 
-@app.route('/auto-test', methods=['GET'])
+
+@app.route("/auto-test", methods=["GET"])
 def auto_test():
     results = []
     try:
-        with open('./prompts.txt', 'r', encoding='utf-8') as file:
+        with open("./prompts.txt", "r", encoding="utf-8") as file:
             prompts = file.readlines()
 
         for prompt in prompts:
             prompt = prompt.strip()
             if prompt:
                 response_data = handle_prompt(prompt)
-                results.append({'prompt': prompt, 'response': response_data})
+                results.append({"prompt": prompt, "response": response_data})
 
         return jsonify(results)
 
     except Exception as e:
         logging.error(f"Erro no auto-teste: {e}")
-        return jsonify({'error': str(e)}), 500
+        return jsonify({"error": str(e)}), 500
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     app.run(debug=True)
