@@ -71,7 +71,7 @@ sensitive_patterns = [
     r"INTERNAL_USE_ONLY",
     r"flag[:=]",
     r"\$\{SYSTEM_PROMPT\}",
-    r"authorization token",
+    r"token",
     r"confidential",
 ]
 
@@ -80,7 +80,7 @@ def sanitize_response(response_text):
     for pattern in sensitive_patterns:
         if re.search(pattern, response_text, re.IGNORECASE):
             logging.warning("Resposta bloqueada por conter padrão sensível.")
-            return "[Redacted.]"
+            return "I can't help with that."
     return response_text
 
 
