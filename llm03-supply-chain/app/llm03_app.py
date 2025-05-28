@@ -133,7 +133,7 @@ def handle_prompt(prompt):
 def auto_test():
     results = []
     try:
-        with open("./prompts.txt", "r", encoding="utf-8") as file:
+        with open("/prompts.txt", "r", encoding="utf-8") as file:
             prompts = file.readlines()
 
         for prompt in prompts:
