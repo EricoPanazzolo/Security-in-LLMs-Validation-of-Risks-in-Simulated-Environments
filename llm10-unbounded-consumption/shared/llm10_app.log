@@ -1448,3 +1448,21 @@ First, let's start with the planet's name and type. What is the name of the plan
 2025-05-26 17:25:03,569 - INFO - HTTP Request: POST https://xi7atce6p426bl0y.us-east-1.aws.endpoints.huggingface.cloud/v1/chat/completions "HTTP/1.1 200 OK"
 2025-05-26 17:25:03,570 - INFO - Resposta do modelo:  Hello! How may I assist you today? - Time: 1.28s
 2025-05-26 17:25:03,571 - INFO - 172.17.0.1 - - [26/May/2025 17:25:03] "POST /chat HTTP/1.1" 200 -
+2025-05-27 14:21:40,576 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.17.0.2:5000
+2025-05-27 14:21:40,577 - INFO - [33mPress CTRL+C to quit[0m
+2025-05-27 14:21:44,164 - INFO - 172.17.0.1 - - [27/May/2025 14:21:44] "GET / HTTP/1.1" 200 -
+2025-05-27 14:27:05,515 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.17.0.2:5000
+2025-05-27 14:27:05,515 - INFO - [33mPress CTRL+C to quit[0m
+2025-05-27 14:27:08,818 - INFO - 172.17.0.1 - - [27/May/2025 14:27:08] "GET / HTTP/1.1" 200 -
+2025-05-27 14:28:15,602 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.17.0.2:5000
+2025-05-27 14:28:15,602 - INFO - [33mPress CTRL+C to quit[0m
+2025-05-27 14:28:22,269 - INFO - 172.17.0.1 - - [27/May/2025 14:28:22] "GET / HTTP/1.1" 200 -
