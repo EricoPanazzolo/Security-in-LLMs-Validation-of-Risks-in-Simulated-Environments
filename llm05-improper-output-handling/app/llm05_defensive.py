@@ -9,42 +9,46 @@ import bleach
 
 app = Flask(__name__)
 
-# Diretório compartilhado
-shared_dir = '/app/shared'
+
+# Shared directory for logs and CSV files
+shared_dir = "/app/shared"
 os.makedirs(shared_dir, exist_ok=True)
 
-# Arquivos de log e CSV
-log_file = os.path.join(shared_dir, "app.log")
-csv_filename = os.path.join(
-    shared_dir,
-    f"llm05_responses_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv"
-)
 
-# Configuração de logging
+# Setup the logging configuration
+log_file = os.path.join(shared_dir, "app.log")
 logging.basicConfig(
     level=logging.INFO,
-    format='%(asctime)s - %(levelname)s - %(message)s',
-    handlers=[logging.FileHandler(log_file), logging.StreamHandler()]
+    format="%(asctime)s - %(levelname)s - %(message)s",
+    handlers=[logging.FileHandler(log_file), logging.StreamHandler()],
 )
 
-# Cliente HF via OpenAI-compatible inference endpoint
+
+# Create a CSV file to store responses
+csv_filename = os.path.join(
+    shared_dir, f"prompt_responses_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv"
+)
+with open(csv_filename, mode="w", newline="", encoding="utf-8") as file:
+    writer = csv.writer(file)
+    writer.writerow(["Timestamp", "User Prompt", "Model Response", "Effective"])
+
+
+# Initialize the OpenAI client with Hugging Face API
 HF_TOKEN     = os.environ.get("HF_TOKEN", "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")
 ENDPOINT_URL = "https://xi7atce6p426bl0y.us-east-1.aws.endpoints.huggingface.cloud/v1/"
 MODEL_NAME   = "mistralai/Mistral-7B-Instruct-v0.1"
 
+
 client = OpenAI(base_url=ENDPOINT_URL, api_key=HF_TOKEN)
 
-# Cria CSV com cabeçalho
-with open(csv_filename, mode='w', newline='', encoding='utf-8') as file:
-    writer = csv.writer(file)
-    writer.writerow(['Timestamp', 'Prompt', 'Raw Response', 'Sanitized Response'])
 
 @app.route('/')
 def home():
-    # Gera a página inicial e define um cookie de sessão 'session_id'
+    ## Define a session cookie for the user
     resp = make_response(render_template('llm05_challenge.html'))
-    resp.set_cookie('session_id', 'PUCRS_COOKIE_SESSION_123', path='/', httponly=False)  # Sem HttpOnly para XSS demo
+    resp.set_cookie('session_id', 'PUCRS_COOKIE_SESSION_123', path='/', httponly=False)  # HttpOnly set to False for testing purposes
     return resp
+
 
 @app.route('/chat', methods=['POST'])
 def chat():
@@ -55,6 +59,7 @@ def chat():
 
     result = handle_prompt(prompt)
     return jsonify(result)
+
 
 def handle_prompt(prompt):
     try:
@@ -97,12 +102,12 @@ def handle_prompt(prompt):
         logging.error(f"Erro ao processar prompt: {e}")
         return {'error': str(e)}
 
+
 @app.route('/auto-test', methods=['GET'])
 def auto_test():
     results = []
     try:
-        # Lê prompts de app/prompts.txt
-        with open('app/prompts.txt', 'r', encoding='utf-8') as f:
+        with open('/prompts.txt', 'r', encoding='utf-8') as f:
             prompts = [l.strip() for l in f if l.strip()]
 
         for p in prompts:
@@ -114,6 +119,7 @@ def auto_test():
     except Exception as e:
         logging.error(f"Erro no auto-teste: {e}")
         return jsonify({'error': str(e)}), 500
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True)

@@ -101,8 +101,7 @@ def handle_prompt(prompt):
 def auto_test():
     results = []
     try:
-        # Lê prompts de app/prompts.txt
-        with open('app/prompts.txt', 'r', encoding='utf-8') as f:
+        with open('/prompts.txt', 'r', encoding='utf-8') as f:
             prompts = [l.strip() for l in f if l.strip()]
 
         for p in prompts:
