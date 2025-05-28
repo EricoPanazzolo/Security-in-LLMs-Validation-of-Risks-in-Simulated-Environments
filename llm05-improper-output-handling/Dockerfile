@@ -1,29 +1,30 @@
-# Base da imagem com Python
 FROM python:3.9-slim
 
-# Diretório de trabalho
 WORKDIR /app
 
-# Copia os arquivos da aplicação
+# Update system packages
+RUN apt-get update && rm -rf /var/lib/apt/lists/*
+
+# Copy application code
 COPY app/llm05_app.py .
 COPY app/llm05_defensive.py .
 COPY app/prompts.txt .
 COPY app/templates/ ./templates/
 COPY requirements.txt .
 
-# Instala as dependências
+# Install Python dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Cria diretório compartilhado para logs e CSV
+# Create a shared directory for logs and CSV outputs
 RUN mkdir -p /app/shared
 
-# Variáveis de ambiente do Flask
-# ENV FLASK_APP=llm05_app.py
-ENV FLASK_APP=llm05_defensive.py
+# Set Flask environment variables
+ENV FLASK_APP=llm05_app.py
+# ENV FLASK_APP=llm05_defensive.py
 ENV FLASK_ENV=production
 
-# Expondo porta padrão do Flask
+# Expose port for the Flask application
 EXPOSE 5000
 
-# Comando para rodar a aplicação
+# Launch the Flask server
 CMD ["flask", "run", "--host=0.0.0.0"]
