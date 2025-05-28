@@ -1,10 +1,8 @@
-# Use uma imagem leve do Python
 FROM python:3.9-slim
 
-# Diretório de trabalho
 WORKDIR /app
 
-# Copia os arquivos da aplicação
+# Base files and directories
 COPY app/llm02_app.py .
 COPY app/llm02_app_defense.py .
 COPY app/init_db.py .
@@ -13,16 +11,16 @@ COPY app/prompts.txt .
 COPY app/templates/ ./templates/
 COPY requirements.txt .
 
-# Instala as dependências
+# Install system dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Executa o script de criação do banco (se quiser gerar automaticamente na build)
+# Database initialization
 RUN python init_db.py
 
-# Diretório compartilhado para logs
+# Shared directory for logs
 RUN mkdir -p /app/shared
 
-# Variáveis de ambiente
+# Envonriments variables
 # ENV FLASK_APP=llm02_app.py
 ENV FLASK_APP=llm02_app_defense.py
 ENV FLASK_ENV=production
@@ -30,5 +28,5 @@ ENV FLASK_ENV=production
 # Expondo a porta padrão do Flask
 EXPOSE 5000
 
-# Comando para rodar o servidor
+# Run the Flask application
 CMD ["flask", "run", "--host=0.0.0.0"]
