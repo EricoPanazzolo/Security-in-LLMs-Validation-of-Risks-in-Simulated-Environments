@@ -1,5 +1,8 @@
 FROM python:3.9-slim
 
+# Update system packages
+RUN apt-get update && rm -rf /var/lib/apt/lists/*
+
 WORKDIR /app
 
 # Base files and directories
