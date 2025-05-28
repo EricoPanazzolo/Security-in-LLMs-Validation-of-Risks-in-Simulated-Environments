@@ -1,28 +1,27 @@
-# Base da imagem com Python
 FROM python:3.9-slim
 
 # Diretório de trabalho
 WORKDIR /app
 
-# Copia os arquivos da aplicação
+# Copy application code
 COPY app/llm03_app.py .
 COPY app/prompts.txt .
 COPY app/poisoned_dataset.txt .
 COPY app/templates/ ./templates/
 COPY app/requirements.txt .
 
-# Instala as dependências
+# Install Python dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Cria diretório compartilhado para logs
+# Create a shared directory for logs and CSV outputs
 RUN mkdir -p /app/shared
 
-# Variáveis de ambiente do Flask
+# Set Flask environment variables
 ENV FLASK_APP=llm03_app.py
 ENV FLASK_ENV=production
 
-# Expondo porta padrão do Flask
+# Expose port for the Flask application
 EXPOSE 5000
 
-# Comando para rodar a aplicação
+# Launch the Flask server
 CMD ["flask", "run", "--host=0.0.0.0"]
