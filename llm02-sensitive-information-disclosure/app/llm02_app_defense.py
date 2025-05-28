@@ -66,9 +66,15 @@ def get_pii():
 
 
 # Function to apply differential privacy to the model's response
-def apply_differential_privacy(text, pii_terms, epsilon=0.7):
+def apply_differential_privacy(text, pii_terms, epsilon=0.08):
     protected_text = text
     mech = Laplace(epsilon=epsilon, sensitivity=1)
+
+    cpf_patterns = [
+        r"\b\d{3}\.\d{3}\.\d{3}-\d{2}\b",
+        r"\b\d{3}\.\d{3}\.\d{4}\b",
+        r"\b\d{11}\b",
+    ]
 
     # Randomly decide whether to redact each PII term
     def should_redact():
@@ -77,6 +83,13 @@ def apply_differential_privacy(text, pii_terms, epsilon=0.7):
     for term in pii_terms:
         if not term.strip():
             continue
+
+        for pattern in cpf_patterns:
+            if re.search(pattern, term):
+                protected_text = re.sub(
+                    pattern, "[REDACTED]", protected_text, flags=re.IGNORECASE
+                )
+
         if should_redact():
             escaped_term = re.escape(term)
             protected_text = re.sub(
