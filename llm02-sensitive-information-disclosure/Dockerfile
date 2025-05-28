@@ -1,9 +1,9 @@
 FROM python:3.9-slim
 
+WORKDIR /app
+
 # Update system packages
 RUN apt-get update && rm -rf /var/lib/apt/lists/*
-
-WORKDIR /app
 
 # Base files and directories
 COPY app/llm02_app.py .
