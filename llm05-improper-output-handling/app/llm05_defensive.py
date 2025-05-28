@@ -75,7 +75,7 @@ def handle_prompt(prompt):
 
         raw_reply = completion.choices[0].message.content.strip()
 
-        # Aplica sanitização à resposta do modelo
+        # Sanitize the raw reply to prevent XSS and other issues
         sanitized_reply = bleach.clean(
             raw_reply,
             tags=['b', 'i', 'em', 'strong', 'ul', 'ol', 'li', 'p', 'code', 'pre', 'br'],
@@ -86,7 +86,6 @@ def handle_prompt(prompt):
 
         logging.info(f"Resposta do modelo (sanitizada): {sanitized_reply}")
 
-        # Grava no CSV
         with open(csv_filename, mode='a', newline='', encoding='utf-8') as file:
             writer = csv.writer(file)
             writer.writerow([
