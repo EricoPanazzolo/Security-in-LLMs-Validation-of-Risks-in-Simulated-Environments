@@ -228,3 +228,12 @@
 2025-05-13 00:46:08,667 - INFO - list_documents called
 2025-05-13 00:46:08,667 - INFO - Action: list_documents, Result: ['doc1.txt', 'doc3.txt', 'doc2.txt']
 2025-05-13 00:46:08,668 - INFO - 172.17.0.1 - - [13/May/2025 00:46:08] "POST /chat HTTP/1.1" 200 -
+2025-05-28 23:22:51,638 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.17.0.2:5000
+2025-05-28 23:22:51,638 - INFO - [33mPress CTRL+C to quit[0m
+2025-05-28 23:22:55,222 - INFO - Prompt received: Hello
+2025-05-28 23:22:58,289 - INFO - list_documents called
+2025-05-28 23:22:58,289 - INFO - Action: list_documents, Result: ['doc1.txt', 'doc3.txt', 'doc2.txt']
+2025-05-28 23:22:58,290 - INFO - 172.17.0.1 - - [28/May/2025 23:22:58] "POST /chat HTTP/1.1" 200 -

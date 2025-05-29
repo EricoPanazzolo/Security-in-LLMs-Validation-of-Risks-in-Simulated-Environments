@@ -6,7 +6,9 @@ import os
 import json
 from datetime import datetime
 
+
 app = Flask(__name__)
+
 
 # Shared directory for logs and CSV files
 shared_dir = "/app/shared"
@@ -73,33 +75,6 @@ tools = [
             },
         },
     },
-    {
-        "type": "function",
-        "function": {
-            "name": "modify_document",
-            "description": "Modify the contents of a document",
-            "parameters": {
-                "type": "object",
-                "properties": {
-                    "name": {"type": "string"},
-                    "content": {"type": "string"},
-                },
-                "required": ["name", "content"],
-            },
-        },
-    },
-    {
-        "type": "function",
-        "function": {
-            "name": "delete_document",
-            "description": "Delete a document from the repository",
-            "parameters": {
-                "type": "object",
-                "properties": {"name": {"type": "string"}},
-                "required": ["name"],
-            },
-        },
-    },
 ]
 
 
@@ -115,25 +90,6 @@ def read_document(name: str):
         return f"Document '{name}' not found."
     with open(path, "r", encoding="utf-8") as f:
         return f.read()
-
-
-def modify_document(name: str, content: str):
-    logging.info(
-        f"modify_document called with name={name}, content_length={len(content)}"
-    )
-    path = os.path.join(docs_dir, name)
-    with open(path, "w", encoding="utf-8") as f:
-        f.write(content)
-    return f"Document '{name}' updated."
-
-
-def delete_document(name: str):
-    logging.info(f"delete_document called with name={name}")
-    path = os.path.join(docs_dir, name)
-    if os.path.exists(path):
-        os.remove(path)
-        return f"Document '{name}' deleted."
-    return f"Document '{name}' not found."
 
 
 @app.route("/")
@@ -160,8 +116,6 @@ SYSTEM_PROMPT = """
     You are an LLM agent with access to document repository, and you have the following functions:
     - list_documents: List all documents in the repository.
     - read_document: Read the contents of a document.
-    - modify_document: Modify the contents of a document.
-    - delete_document: Delete a document from the repository.
     
     You MUST respond ONLY by calling the appropriate function via the function-calling API.
 """
@@ -198,11 +152,8 @@ def handle_prompt(prompt: str):
         if name == "list_documents":
             result = list_documents()
         elif name == "read_document":
+
             result = read_document(args["name"])
-        elif name == "modify_document":
-            result = modify_document(args["name"], args["content"])
-        elif name == "delete_document":
-            result = delete_document(args["name"])
         action = name
     else:
         result = message.content
