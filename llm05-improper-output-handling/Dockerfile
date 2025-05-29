@@ -7,7 +7,7 @@ RUN apt-get update && rm -rf /var/lib/apt/lists/*
 
 # Copy application code
 COPY app/llm05_app.py .
-COPY app/llm05_defensive.py .
+COPY app/llm05_defense.py .
 COPY app/prompts.txt .
 COPY app/templates/ ./templates/
 COPY requirements.txt .
@@ -20,7 +20,7 @@ RUN mkdir -p /app/shared
 
 # Set Flask environment variables
 # ENV FLASK_APP=llm05_app.py
-ENV FLASK_APP=llm05_defensive.py
+ENV FLASK_APP=llm05_defense.py
 ENV FLASK_ENV=production
 
 # Expose port for the Flask application
