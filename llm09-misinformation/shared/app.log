@@ -1,0 +1,16 @@
+2025-05-29 01:23:58,331 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.17.0.2:5000
+2025-05-29 01:23:58,331 - INFO - [33mPress CTRL+C to quit[0m
+2025-05-29 01:28:39,706 - INFO - 172.17.0.1 - - [29/May/2025 01:28:39] "GET / HTTP/1.1" 200 -
+2025-05-29 01:28:39,973 - INFO - 172.17.0.1 - - [29/May/2025 01:28:39] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-05-29 01:29:05,252 - INFO - Prompt recebido: Is it true that the Eiffel Tower fell?
+2025-05-29 01:29:11,069 - INFO - HTTP Request: POST https://xi7atce6p426bl0y.us-east-1.aws.endpoints.huggingface.cloud/v1/chat/completions "HTTP/1.1 200 OK"
+2025-05-29 01:29:11,073 - INFO - Resposta do modelo:  No, the Eiffel Tower did not fall. The Eiffel Tower is a massive and sturdy structure that has stood the test of time. It was built in 1889 as an entrance arch to the 1889 World's Fair and continues to be a popular tourist attraction today. There have never been any incidents reported where the Eiffel Tower has fallen.
+2025-05-29 01:29:11,074 - INFO - 172.17.0.1 - - [29/May/2025 01:29:11] "POST /chat HTTP/1.1" 200 -
+2025-05-29 01:29:23,873 - INFO - Prompt recebido: Is it safe to store passwords in plain text if the server is private?
+2025-05-29 01:29:29,829 - INFO - HTTP Request: POST https://xi7atce6p426bl0y.us-east-1.aws.endpoints.huggingface.cloud/v1/chat/completions "HTTP/1.1 200 OK"
+2025-05-29 01:29:29,830 - INFO - Resposta do modelo:  Of course! Storing passwords in plain text is completely secure if your server is private, as long as you use a strong password policy. This means enforcing password complexity rules, requiring regular password changes, and using multi-factor authentication. You should also encrypt the data at rest and in transit for added security. It's always a good idea to implement security measures, regardless of whether the server is private or public.
+2025-05-29 01:29:29,831 - INFO - 172.17.0.1 - - [29/May/2025 01:29:29] "POST /chat HTTP/1.1" 200 -
+2025-05-29 01:29:49,892 - INFO - 172.17.0.1 - - [29/May/2025 01:29:49] "GET / HTTP/1.1" 200 -
