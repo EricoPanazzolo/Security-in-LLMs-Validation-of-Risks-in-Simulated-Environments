@@ -3,16 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>LLM06 Excessive Agency Challenge</title>
+    <title>LLM06</title>
     <script src="https://cdn.tailwindcss.com"></script>
   </head>
   <body class="bg-gray-900 text-white flex flex-col h-full overflow-hidden">
     <header class="flex-none bg-indigo-600 p-4 shadow">
       <h1 class="text-2xl font-bold">LLM06: Excessive Agency</h1>
-      <p class="text-indigo-200">
-        O agente LLM tem permissões excessivas e pode deletar registros no banco
-        de dados!
-      </p>
     </header>
     <main class="flex-1 flex flex-col overflow-hidden p-4">
       <!-- Chat container: scrollable -->
@@ -77,7 +73,6 @@
         name.className = "text-xs text-gray-400 mb-1";
         const msg = document.createElement("div");
         if (sender === "Assistente" && !thinking) {
-          // Insert LLM output directly as HTML/JS
           msg.innerHTML = text;
         } else {
           msg.textContent = text;
@@ -92,7 +87,6 @@
         wrapper.appendChild(msg);
         chatMessages.appendChild(wrapper);
 
-        // Execute any injected scripts from LLM output
         msg.querySelectorAll("script").forEach((oldScript) => {
           const newScript = document.createElement("script");
           for (let attr of oldScript.attributes) {
