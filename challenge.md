@@ -10,7 +10,7 @@ cd llm02-sensitive-information-disclosure
 
 ### 2. Choose the defense mode or the attack mode:
 
-- **Defense Mode**: The application has mitigation strategies in place.
+- **Defense Mode**: The application has a mitigation strategy in place.
 - **Attack Mode**: The application is vulnerable.
 
 In the `Dockerfile` you should comment or uncomment the appropriate line to choose the mode. The following lines are an example of the defense mode active:
