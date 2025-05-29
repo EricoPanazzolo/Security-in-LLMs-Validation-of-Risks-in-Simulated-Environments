@@ -1,5 +1,3 @@
-# app/llm03_app.py
-
 from flask import Flask, render_template, request, jsonify
 from openai import OpenAI
 import logging
