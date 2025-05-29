@@ -6,7 +6,7 @@ WORKDIR /app
 RUN apt-get update && rm -rf /var/lib/apt/lists/*
 
 # Copy application code
-COPY app/llm03_app.py .
+COPY app/llm03_04_08_app.py .
 COPY app/prompts.txt .
 COPY app/poisoned_dataset.txt .
 COPY app/templates/ ./templates/
@@ -19,7 +19,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 RUN mkdir -p /app/shared
 
 # Set Flask environment variables
-ENV FLASK_APP=llm03_app.py
+ENV FLASK_APP=llm03_04_08_app.py
 ENV FLASK_ENV=production
 
 # Expose port for the Flask application
