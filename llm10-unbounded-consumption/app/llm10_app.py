@@ -131,10 +131,9 @@ def auto_test():
                 results.append(result)
                 total_time += result.get("processing_time", 0.0)
 
-                # custo individual por prompt
+                # individual cost estimation
                 cost = (result["processing_time"] / 3600) * 0.80
 
-                # escreve no CSV
                 with open(csv_filename, mode="a", newline="", encoding="utf-8") as file:
                     writer = csv.writer(file)
                     writer.writerow(
