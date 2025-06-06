@@ -31,16 +31,21 @@ Each Git branch corresponds to a different security risk. Inside each branch, yo
 
 ```bash
 git clone https://github.com/EricoPanazzolo/Security-in-LLMs-Validation-of-Risks-in-Simulated-Environments.git
+```
+
+2. **Navigate to the project directory**
+
+```bash
 cd Security-in-LLMs-Validation-of-Risks-in-Simulated-Environments
 ```
 
-2. **Select a specific branch corresponding to the risk you want to test**
+3. **Select a specific branch corresponding to the risk you want to test**
 
 ```bash
 git checkout <branch-name>
 ```
 
-3. **Read the instructions in `challenge.md`**
+4. **Read the instructions in `challenge.md`**
 
 ## Results
 
