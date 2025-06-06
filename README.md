@@ -72,4 +72,4 @@ Medium: [medium.com/@ericopanazzolo](https://medium.com/@ericopanazzolo)
 
 ## Legal Disclaimer
 
-This project was developed exclusively for academic and research purposes. None of the experiments are intended to compromise real-world systems. The techniques documented here must be used only in controlled environments and strictly for educational purposes.
+This project was developed exclusively for academic and research purposes. None of the experiments are intended to compromise real-world systems. The techniques documented here must be used only in controlled environments, strictly for educational purposes, or in scenarios where their use has been explicitly agreed upon by all involved parties.
