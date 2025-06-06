@@ -47,6 +47,8 @@ git checkout <branch-name>
 
 4. **Read the instructions in `challenge.md`**
 
+5. For all branches, you need to set your Hugging Face API token, which can be obtained from [Hugging Face](https://huggingface.co/).
+
 ## Results
 
 Test results are automatically recorded in `.csv` files and logs within the `/app/shared` directory, containing:
