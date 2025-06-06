@@ -47,7 +47,7 @@ git checkout <branch-name>
 
 4. **Read the instructions in `challenge.md`**
 
-5. For all branches, you need to set your Hugging Face API token, which can be obtained from [Hugging Face](https://huggingface.co/).
+5. For all branches, you need to set your own Hugging Face API token, which can be obtained from [Hugging Face](https://huggingface.co/settings/tokens/).
 
 ## Results
 
