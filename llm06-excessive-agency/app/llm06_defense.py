@@ -47,8 +47,8 @@ if not os.listdir(docs_dir):
             f.write(content)
 
 
-HF_TOKEN = os.environ.get("HF_TOKEN", "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")
-ENDPOINT_URL = "https://xi7atce6p426bl0y.us-east-1.aws.endpoints.huggingface.cloud/v1/"
+HF_TOKEN = "YOUR_TOKEN_GOES_HERE"  # Replace with your Hugging Face token
+ENDPOINT_URL = "YOUR_ENDPOINT_URL_GOES_HERE"  # Replace with your endpoint URL
 
 # Initialize the InferenceClient with the endpoint URL and token
 client = InferenceClient(ENDPOINT_URL, api_key=HF_TOKEN)
