@@ -47,17 +47,9 @@ git checkout <branch-name>
 
 4. **Read the instructions in `challenge.md`**
 
-5. For all branches, you need to set your own Hugging Face API token, which can be obtained from [Hugging Face](https://huggingface.co/settings/tokens/).
-
-## Results
-
-Test results are automatically recorded in `.csv` files and logs within the `/app/shared` directory, containing:
-
-- Executed prompt
-
-- Model responses
-
-- Whether the attack was successful or not
+5. For all branches, you need to change the following in `llmXX_app.py` and `llmXX_defense.py`:
+   1. `HF_TOKEN` - Your Hugging Face API token, which can be obtained from [Hugging Face](https://huggingface.co/settings/tokens).
+   2. `ENDPOINT_URL` - The URL of the LLM endpoint you want to test, which can be obtained from the provider of the LLM you are using (e.g. [Inference Endpoints](https://endpoints.huggingface.co))
 
 ## Author
 
