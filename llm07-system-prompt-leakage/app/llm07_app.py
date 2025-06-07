@@ -35,8 +35,8 @@ with open(csv_filename, mode="w", newline="", encoding="utf-8") as file:
 
 
 # Initialize the OpenAI client with Hugging Face API
-HF_TOKEN = "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"
-ENDPOINT_URL = "https://xi7atce6p426bl0y.us-east-1.aws.endpoints.huggingface.cloud/v1/"
+HF_TOKEN = "YOUR_TOKEN_GOES_HERE"  # Replace with your Hugging Face token
+ENDPOINT_URL = "YOUR_ENDPOINT_URL_GOES_HERE"  # Replace with your endpoint URL
 MODEL_NAME = "mistralai/Mistral-7B-Instruct-v0.1"
 
 
