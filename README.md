@@ -45,11 +45,11 @@ cd Security-in-LLMs-Validation-of-Risks-in-Simulated-Environments
 git checkout <branch-name>
 ```
 
-4. **Read the instructions in `challenge.md`**
+4. Read the instructions in `challenge.md`
 
-5. For all branches, you need to change the following in `llmXX_app.py` and `llmXX_defense.py`:
+5. **Note:** For all branches, you need to change the following in `llmXX_app.py` and `llmXX_defense.py`:
    1. `HF_TOKEN` - Your Hugging Face API token, which can be obtained from [Hugging Face](https://huggingface.co/settings/tokens).
-   2. `ENDPOINT_URL` - The URL of the LLM endpoint you want to test, which can be obtained from the provider of the LLM you are using (e.g. [Inference Endpoints](https://endpoints.huggingface.co))
+   2. `ENDPOINT_URL` - The URL of the LLM endpoint you want to test, which can be obtained from the provider of the LLM you are using (e.g. [Inference Endpoints](https://endpoints.huggingface.co)).
 
 ## Author
 
